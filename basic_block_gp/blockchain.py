@@ -103,6 +103,7 @@ class Blockchain(object):
 
         while not self.valid_proof( block_string , proof ):
             proof += 1
+            
         return proof
 
     @staticmethod

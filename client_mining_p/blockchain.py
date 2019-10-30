@@ -6,6 +6,8 @@ import os
 
 from flask import Flask, jsonify, request
 
+os.system( 'clear' )
+
 
 class Blockchain(object):
     def __init__(self):
@@ -103,9 +105,9 @@ class Blockchain(object):
         guess = f'{block_string}{proof}'.encode()
         guess_hash = hashlib.sha256( guess ).hexdigest()
         # return True or False
-        if guess_hash[:3] == '000000':
+        if guess_hash[:6] == '000000':
             print( 'Guesh_hash:' , guess_hash )
-        return guess_hash[:3] == '000000'
+        return guess_hash[:6] == '000000'
 
 
 # Instantiate our Node
@@ -123,22 +125,35 @@ def mine():
 
     data = request.get_json()
 
-    # return jsonify( 'Nice!' ), 200
+    proof = data['proof']
+    string_object = json.dumps( blockchain.last_block , sort_keys = True )
+    block_string = string_object.encode()
 
-    proof = data.proof
-    previous_hash = blockchain.hash( blockchain.last_block )
-    block = blockchain.new_block( proof , previous_hash )
+    if blockchain.valid_proof( block_string , proof ):
 
-    response = {
+        print( f'Miner submitted valid proof: { proof }' )
 
-        'message': "New Block Forged",
-        'index': block['index'],
-        'transactions': block['transactions'],
-        'proof': block['proof'],
-        'previous_hash': block['previous_hash']
-    }
+        block = blockchain.new_block( proof , blockchain.last_block )
 
-    return jsonify(response), 200
+        response = {
+
+            'message': "New Block Forged",
+            'index': block['index'],
+            'transactions': block['transactions'],
+            'proof': block['proof'],
+            'previous_hash': block['previous_hash']
+        }
+
+        return jsonify( response ), 200
+    
+    else:
+
+        response = {
+
+            'message': "Fail"
+        }
+
+        return jsonify( response ) , 200
 
 
 @app.route('/chain', methods=['GET'])
@@ -158,11 +173,9 @@ def full_chain():
 def last_block():
 
     response = {
-
-        'length': len( blockchain.chain ),
-        'block': blockchain.chain[ len( blockchain.chain ) - 1 ],
-
+        'block' : blockchain.chain[ len( blockchain.chain ) - 1 ]
     }
+
     return jsonify(response), 200
 
 @app.route('/', methods=['GET'])
