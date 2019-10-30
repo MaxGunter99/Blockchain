@@ -1,6 +1,5 @@
 import hashlib
 import requests
-
 import sys
 import json
 
@@ -13,7 +12,16 @@ def proof_of_work(block):
     in an effort to find a number that is a valid proof
     :return: A valid proof for the provided block
     """
-    pass
+    string_object = json.dumps( block , sort_keys = True )
+    block_string = string_object.encode()
+
+    proof = 0
+
+    while proof # is not valid
+        proof += 1
+    
+
+    return proof
 
 
 def valid_proof(block_string, proof):
@@ -27,7 +35,13 @@ def valid_proof(block_string, proof):
     correct number of leading zeroes.
     :return: True if the resulting hash is a valid proof, False otherwise
     """
-    pass
+
+    guess = f'{block_string}{proof}'.encode()
+    guess_hash = hashlib.sha256( guess ).hexdigest()
+
+    if guess_hash[:3] == '000000':
+        print( 'Guesh_hash:' , guess_hash )
+        return guess_hash[:3] == '000000'
 
 
 if __name__ == '__main__':
@@ -38,7 +52,7 @@ if __name__ == '__main__':
         node = "http://localhost:5000"
 
     # Load ID
-    f = open("my_id.txt", "r")
+    f = open("michael_gunter.txt", "r")
     id = f.read()
     print("ID is", id)
     f.close()
