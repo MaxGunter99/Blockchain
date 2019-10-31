@@ -1,0 +1,16 @@
+----- BATTERIES INCLUDED -----
+
+MINER: 
+
+    client_mining_p => miner.py
+    in pipenv shell => python3 miner.py
+
+SERVER:
+
+    basic_transactions_gp => blockchain.py
+    in pipenv shell => python3 blockchain.py
+
+CLIENT:
+
+    basic_wallet_p => bitcoin_client
+    simple react app
