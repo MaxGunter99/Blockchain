@@ -1,0 +1,104 @@
+.App {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center;
+  justify-content: center; */
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: rgb(255, 196, 86);
+  color: black;
+}
+
+.Header div {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.Header div img {
+  height: 100px;
+  width: auto;
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.coinContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.Header a {
+  color: black;
+  text-decoration: none;
+  padding: 10px;
+  font-size: 25px;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 10px;
+  background-color: white;
+  transition: .5s;
+}
+
+.Header a.active {
+  color: white;
+  background-color: black;
+  transition: .5s;
+}
+
+.coin {
+  width: 90%;
+  border: 1px solid white;
+  margin: 0 auto;
+  padding: 30px;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+}
+
+.coininfo {
+  padding: 10px;
+  border: 1px solid white;
+  background-color: black;
+}
+
+.CurrentUser {
+  padding: 20px;
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+.CurrentUser form {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.CurrentUser form input#username {
+  width: 60%;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+}
+
+.CurrentUser form button {
+  width: 60%;
+  padding: 10px;
+  margin: 20px;
+}
