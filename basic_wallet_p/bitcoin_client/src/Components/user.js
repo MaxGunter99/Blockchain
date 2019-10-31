@@ -12,9 +12,9 @@ export default class user extends React.Component {
 
     componentDidMount() {
         axios
-            .get(`http://0.0.0.0:5000/userid` )
+            .get(`http://0.0.0.0:5000/userid`)
             .then(res => {
-                console.log( res.data )
+                console.log(res.data)
                 this.setState({
                     user: res.data,
                     newUser: res.data
@@ -35,7 +35,7 @@ export default class user extends React.Component {
     };
 
     toggleSettings = () => {
-        if ( this.state.settings === false ) {
+        if (this.state.settings === false) {
             this.setState({ settings: true })
         } else {
             this.setState({ settings: false })
@@ -44,11 +44,11 @@ export default class user extends React.Component {
 
     updateUser = event => {
         event.preventDefault()
-        console.log( this.state.user )
+        console.log(this.state.user)
         axios
-            .post(`http://0.0.0.0:5000/useridupdate` , this.state.user  )
+            .post(`http://0.0.0.0:5000/useridupdate`, this.state.user)
             .then(res => {
-                console.log( 'success' )
+                console.log('success')
                 this.toggleSettings()
             })
             .catch(error => console.error(error));
@@ -56,30 +56,31 @@ export default class user extends React.Component {
 
     render() {
         return (
-            <> 
-                <div className = 'CurrentUser'>
-                    <div className = 'userInfo'>
+            <>
+                <div className='CurrentUser'>
+                    <div className='userInfo'>
                         <p><strong>Username: </strong>{this.state.user.message}</p>
                     </div>
-                    { this.state.settings === true ? (
+                    <div>
+                        {this.state.settings === true ? (
 
-                        <form onSubmit = { this.updateUser } >
-                            <label>Change User ID</label>
-                            <input
-                                id = 'username'
-                                type = 'text'
-                                name = 'message'
-                                value = { this.state.user.message }
-                                placeholder = 'Username'
-                                onChange = { this.changeHandler }
-                            />
-        
-                            <button type = 'submit' className = 'submitButton'> Done </button>
-    
-                        </form>
-                    ) : null }
-                    <div className = 'settingsButtonContainer'>
-                        <button onClick = {this.toggleSettings}>Change Username</button>
+                            <form onSubmit={this.updateUser} >
+                                <label>Change User ID</label>
+                                <input
+                                    id='username'
+                                    type='text'
+                                    name='message'
+                                    value={this.state.user.message}
+                                    placeholder='Username'
+                                    onChange={this.changeHandler}
+                                />
+
+                                <button type='submit' className='submitButton'> Done </button>
+
+                            </form>
+                        ) : <div className='settingsButtonContainer'>
+                                <button onClick={this.toggleSettings}>Change Username</button>
+                            </div>}
                     </div>
                 </div>
             </>
